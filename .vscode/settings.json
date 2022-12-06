@@ -24,8 +24,8 @@
             "driver": "MySQL",
             "name": "ArtObjects_Database",
             "database": "Art_Museum",
-            "username": "root",
-            "password": "People7247%",
+            "username": "administrator",
+            "password": "password",
             "connectionTimeout": 1000
         }
     ]

@@ -1,5 +1,20 @@
 import mysql.connector
 
+def format(cur):
+    col_names=cur.column_names
+    search_result=cur.fetchall()
+    print("Search found ",len(search_result)," Entries:\n")
+    header_size=len(col_names)
+    for i in range(header_size):
+        print("{:<30s}".format(col_names[i]),end='')
+    print()
+    print(30*header_size*'-')
+    for row in search_result:
+        for val in row:
+            print("{:<30s}".format(str(val)),end='')
+        print()
+
+
 def admin_consol(cur,cnx): 
     print("Which operation would you like to execute?")
     print("1-Insert")
@@ -10,13 +25,47 @@ def admin_consol(cur,cnx):
     print("6-Alter")
     print("7-Query")
     print("8-Manage Users")
+    selection = input("Please type 1, 2, 3, 4, 5, 6, 7, or 8 to select: ")
+    if selection == '8':
+        user_management(cur,cnx)
+    
+
+
 
 
 def user_management(cur,cnx):
     user_choice = input("Would you like to print all current users? (Y or N) ")
     if user_choice == 'Y':
-        pass
-    pass
+        instr = "select * from information_schema.USER_PRIVILEGES"
+        cur.execute(instr)
+        format(cur)
+        print()
+        print("Which operation would you like to execute?")
+        print("1- Add a new user")
+        print("2- Edit current users")
+        print("3- Can block users")
+        print("4- Modify users")
+        selection = input("Please enter 1,2,3 or 4: ")
+        if selection == '1':
+            username = input("Please enter the username you would like to add: ") or None
+            password = input("Please enter the password you would like to add: ") or None
+            dropping_user = "drop user if exists '%s'@localhost"
+            cur.execute(dropping_user,)
+            adding_user = "create user '%s'@localhost identified with mysql_native_password by '%s'"
+            cur.execute(adding_user, (username,password,), multi = True)
+            cnx.commit()
+            print("The user was added successfully")
+            startup()
+
+    else:
+        print("Which operation would you like to execute?")
+        print("1- Add a new user")
+        print("2- Edit current users")
+        print("3- Can block users")
+        print("4- Modify users")
+        selection = input("Please enter 1,2,3 or 4: ")
+        
+
 
 def guest_view(cur):
     print("What are you looking for:")
@@ -66,7 +115,7 @@ def startup():
 
 
     if selection == '1':
-        pass
+        admin_consol(cur,cnx)
     elif selection == '2':
         pass
     elif selection == '3':
