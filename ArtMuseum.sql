@@ -118,14 +118,18 @@ CREATE TABLE SCULPTURE (
     DROP TABLE IF EXISTS COLLECTIONS;
     CREATE TABLE COLLECTIONS (
     Cname					varchar(30),
-    C_des					varchar(30),
+    C_des					varchar(200),
     Contpers				varchar(30),
-    Ctype					varchar(30),
+    Ctype					varchar(80),
     Phone					varchar(30),
     Address					varchar(30),
     primary key (Cname)
     );
 
+    INSERT INTO COLLECTIONS (Cname, C_des, Contpers, Ctype, Phone, Address)
+    VALUES
+    ('masterpieces of the louvre','Artworks essential to history and the history of art','Alissa Brown','Paintings', '(945)-589-6261', '1798 Chapel Street'),
+    ('the art of portraiture','portraiture through the ages with sculptures, paintings, drawings and engravings of emblematic figures','Ashley Carter','paintings, drawings and engravings of emblematic figures', '(751)-431-1244', '292 Lyon Avenue');
 
 DROP ROLE IF EXISTS db_admin@localhost, read_access@localhost;
 CREATE ROLE db_admin@localhost, read_access@localhost;
