@@ -85,3 +85,4 @@ def guest_view(cur):
     print("3- Country information")
     selection = input()
 
+
