@@ -14,8 +14,6 @@ def format(cur):
             print("{:<50s}".format(str(val)),end='')
         print()
 
-def guest_view(cur):
-    pass
 
 def admin_consol(cur,cnx): 
     print("Which operation would you like to execute?")
@@ -139,16 +137,25 @@ def user_edit(cur,cnx):
 
 
 def guest_view(cur):
-    print("What are you looking for:")
-    print("1- Event information")
-    print("2- Participant information")
-    print("3- Country information")
+    print("What would you like to see:")
+    print("1- Art Object Information")
+    print("2- Artist Information")
+    print("3- Our Collections")
     selection = input()
 
-    if selection == '2':
-        subselection = input('Please type 1 for Athletes or 2 for Coaches:\n')
+    if selection == '1':
+        print("Which type of art object would you like to see information for?")
+        print("1- Sculptures")
+        print("2- Statues")
+        print("3- Paintings")
+        print("4- Other")
+        subselection = input('Please type 1, 2, 3 or 4:')
         if subselection == '1':
-            pass
+            join = "from sculpture natural join art_object"
+            cur.execute(join)
+            instr = "select * from art_object"
+            cur.execute(instr)
+            format(cur)
         if subselection == '2':
             pass
 
