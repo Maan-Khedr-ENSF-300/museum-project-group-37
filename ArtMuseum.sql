@@ -140,3 +140,165 @@ GRANT db_admin@localhost TO administrator@localhost;
 GRANT read_access@localhost TO guest@localhost;
 SET DEFAULT ROLE ALL TO administrator@localhost;
 SET DEFAULT ROLE ALL TO guest@localhost;
+
+def insert_sculpture(cur,cnx):
+    id_numbersc = input("Please enter the id number of the sculpture: ") or None
+    delete_sculpture_id = "delete from sculpture where id number = %s"
+    val = (id_numbersc,)
+    cur.execute(delete_sculpture_id, val)
+    height_sc = input("Enter the height of the sculpture (press enter and leave blank if unknown): ") or None
+    material_sc = input("Enter the material of the sculpture (press enter and leave blank if unknown): ") or None
+    style_sc = input("Enter the style of the sculpture (press enter and leave blank if unknown): ") or None
+    insert_sculpture = ("insert into sculpture "
+                        "values (%s,%s,%s,%s)")
+    sculpture_data = (id_numbersc,height_sc,material_sc,style_sc)
+    cur.execute(insert_sculpture,sculpture_data)
+    cnx.commit()
+    instr = "select * from sculpture"
+    cur.execute(instr)
+    format(cur)
+    while id_numbersc == None:
+        print("Your sculpture needs an id number!")
+        id_numbersc = input("Please enter the id number of the sculpture: ") or None
+        if id_numbersc == None:
+            continue
+        else:
+            delete_sculpture_id = "delete from sculpture where id number = %s"
+            val = (id_numbersc,)
+            cur.execute(delete_sculpture_id, val)
+            height_sc = input("Enter the height of the sculpture (press enter and leave blank if unknown): ") or None
+            material_sc input("Enter the material of the sculpture (press enter and leave blank if unknown): ") or None
+            style_sc = input("Enter the style of the sculpture (press enter and leave blank if unknown): ") or None
+            insert_sculpture = ("insert into sculpture "
+                                "values (%s,%s,%s,%s)")
+            sculpture_data = (id_numbersc,height_sc,material_sc,style_sc)
+            cur.execute(insert_sculpture,sculpture_data)
+            cnx.commit()
+            instr = "select * from sculpture"
+            cur.execute(instr)
+            print("Displaying results...")
+            format(cur)
+            startup()
+        
+
+def insert_statue(cur,cnx):
+    id_numberst = input("Please enter the id number of the statue: ") or None
+    delete_statue_id = "delete from statue where id number = %s"
+    val = (id_numberst,)
+    cur.execute(delete_statue_id, val)
+    height_st = input("Enter the height of the statue (press enter and leave blank if unknown): ") or None
+    material_st = input("Enter the material of the statue (press enter and leave blank if unknown): ") or None
+    style_st = input("Enter the style of the statue (press enter and leave blank if unknown): ") or None
+    insert_statue = ("insert into statue "
+                        "values (%s,%s,%s,%s)")
+    statue_data = (id_numberst,height_st,material_st,style_st)
+    cur.execute(insert_statue,statue_data)
+    cnx.commit()
+    instr = "select * from statue"
+    cur.execute(instr)
+    format(cur)
+    while id_numberst == None:
+        print("Your statue needs an id number!")
+        id_numberst = input("Please enter the id number of the statue: ") or None
+        if id_numberst == None:
+            continue
+        else:
+            delete_statue_id = "delete from statue where id number = %s"
+            val = (id_numberst,)
+            cur.execute(delete_statue_id, val)
+            height_st = input("Enter the height of the statue (press enter and leave blank if unknown): ") or None
+            material_st input("Enter the material of the statue (press enter and leave blank if unknown): ") or None
+            style_st = input("Enter the style of the statue (press enter and leave blank if unknown): ") or None
+            insert_statue = ("insert into statue "
+                                "values (%s,%s,%s,%s)")
+            statue_data = (id_numberst,height_st,material_st,style_st)
+            cur.execute(insert_statue,statue_data)
+            cnx.commit()
+            instr = "select * from statue"
+            cur.execute(instr)
+            print("Displaying results...")
+            format(cur)
+            startup()
+
+
+def insert_painting(cur,cnx):
+    id_numberp = input("Please enter the id number of the painting: ") or None
+    delete_painting_id = "delete from painting where id number = %s"
+    val = (id_numberp,)
+    cur.execute(delete_painting_id, val)
+    type_p = input("Enter the paint type of the painting (press enter and leave blank if unknown): ") or None
+    material_p = input("Enter the material of the painting (press enter and leave blank if unknown): ") or None
+    style_p = input("Enter the style of the painting (press enter and leave blank if unknown): ") or None
+    insert_painting = ("insert into painting "
+                        "values (%s,%s,%s,%s)")
+    painting_data = (id_numberp,type_p,material_p,style_p)
+    cur.execute(insert_painting,painting_data)
+    cnx.commit()
+    instr = "select * from painting"
+    cur.execute(instr)
+    format(cur)
+    while id_numberp == None:
+        print("Your painting needs an id number!")
+        id_numberp = input("Please enter the id number of the painting: ") or None
+        if id_numberp == None:
+            continue
+        else:
+            delete_painting_id = "delete from painting where id number = %s"
+            val = (id_numberp,)
+            cur.execute(delete_painting_id, val)
+            type_p = input("Enter the paint type of the painting (press enter and leave blank if unknown): ") or None
+            material_p = input("Enter the material of the painting (press enter and leave blank if unknown): ") or None
+            style_p = input("Enter the style of the painting (press enter and leave blank if unknown): ") or None
+            insert_painting = ("insert into painting "
+                                "values (%s,%s,%s,%s)")
+            painting_data = (id_numberp,type_p,material_p,style_p)
+            cur.execute(insert_painting,painting_data)
+            cnx.commit()
+            instr = "select * from painting"
+            cur.execute(instr)
+            print("Displaying results...")
+            format(cur)
+            startup()
+
+def insert_other(cur,cnx):
+    id_numbero = input("Please enter the id number of other: ") or None
+    delete_other_id = "delete from other where id number = %s"
+    val = (id_numbero,)
+    cur.execute(delete_other_id, val)
+    type_o = input("Enter the type of the piece (press enter and leave blank if unknown): ") or None
+    style_o = input("Enter the style of the piece (press enter and leave blank if unknown): ") or None
+    insert_other = ("insert into other "
+                        "values (%s,%s,%s)")
+    other_data = (id_numbero,type_o,style_o)
+    cur.execute(other_painting,other_data)
+    cnx.commit()
+    instr = "select * from other"
+    cur.execute(instr)
+    format(cur)
+    while id_numbero == None:
+        print("Your piece needs an id number!")
+        id_numbero = input("Please enter the id number of the piece: ") or None
+        if id_numbero == None:
+            continue
+        else:
+            delete_other_id = "delete from other where id number = %s"
+            val = (id_numbero,)
+            cur.execute(delete_other_id, val)
+            type_o = input("Enter the type of the piece (press enter and leave blank if unknown): ") or None
+            style_o = input("Enter the style of the piece (press enter and leave blank if unknown): ") or None
+            insert_other = ("insert into other "
+                                "values (%s,%s,%s)")
+            other_data = (id_numbero,type_o,style_o)
+            cur.execute(insert_other,other_data)
+            cnx.commit()
+            instr = "select * from other"
+            cur.execute(instr)
+            print("Displaying results...")
+            format(cur)
+            startup()
+
+
+
+
+
+
