@@ -14,6 +14,9 @@ def format(cur):
             print("{:<50s}".format(str(val)),end='')
         print()
 
+def guest_view(cur):
+    pass
+
 def admin_consol(cur,cnx): 
     print("Which operation would you like to execute?")
     print("1-Insert")
@@ -29,7 +32,35 @@ def admin_consol(cur,cnx):
         user_adding(cur,cnx)
     
 
-
+def block_users(cur,cnx):
+    print()
+    print("List of all current users and their privileges:")
+    print()
+    instr = "select * from information_schema.USER_PRIVILEGES"
+    cur.execute(instr)
+    format(cur)
+    print()
+    username = input("Please enter the username of the user you would like to block or unblock: ")
+    print("What would you like to do?")
+    print("1- Block user", username)
+    print("2- Unblock user", username)
+    selection = input("Please enter 1 or 2: ")
+    if selection == '1':
+        instr = "alter user '%s'@localhost account lock"%(username)
+        cur.execute(instr)
+        privileges = "flush privileges"
+        cur.execute(privileges)
+        cnx.commit()
+        print("User ", username, "was successfully blocked")
+        startup()
+    if selection == '2':
+        instr = "alter user '%s'@localhost account unlock"%(username)
+        cur.execute(instr)
+        privileges = "flush privileges"
+        cur.execute(privileges)
+        cnx.commit()
+        print("User", username, "was successfully unblocked")
+        startup()
 
 
 def user_adding(cur,cnx):
@@ -43,7 +74,7 @@ def user_adding(cur,cnx):
     print("Which operation would you like to execute?")
     print("1- Add a new user")
     print("2- Edit current users")
-    print("3- Can block users")
+    print("3- Block users")
     print("4- Modify users")
     selection = input("Please enter 1,2,3 or 4: ")
     if selection == '1':
@@ -60,8 +91,12 @@ def user_adding(cur,cnx):
         cnx.commit()
         print("The user was added successfully")
         startup()
+    if selection == '2':
+        user_edit(cur,cnx)
+    if selection == '3':
+        block_users(cur, cnx)
 
-def user_access(cur):
+def user_edit(cur,cnx):
     print()
     print("List of all current users and their privileges:")
     print()
@@ -69,7 +104,38 @@ def user_access(cur):
     cur.execute(instr)
     format(cur)
     print()
-    pass
+    print("What would you like to do?")
+    print("1- Change a user's username")
+    print("2- Change a user's password")
+    selection = input("Please enter 1, or 2: ")
+    if selection == '1':
+        username = input("Please enter the username of the user you would like to edit: ")
+        new_username = input("Please enter the new username you would like for this user: ")
+        instr = "rename user '%s'@localhost to '%s'@localhost" %(username,new_username)
+        cur.execute(instr)
+        privileges = "flush privileges"
+        cur.execute(privileges)
+        cnx.commit()
+        print("The username was updated successfully!")
+        startup()
+    elif selection == '2':
+        username = input("Please enter the username of the user you would like to edit: ")
+        new_password = input("Please enter the new password you would like for this user: ")
+        passwordconfirm = input("Please re-enter the password to confirm: ")  
+        if new_password == passwordconfirm:
+            instr = "alter user '%s'@localhost identified by '%s'" %(username,passwordconfirm)
+            cur.execute(instr)
+            privileges = "flush privileges"
+            cur.execute(privileges)
+            cnx.commit()
+            print("The password was changed successfully!")
+            startup()
+        else: 
+            print()
+            print("The passwords do not match ... ")
+            startup()
+    else: 
+        startup()
 
 
 def guest_view(cur):
@@ -102,9 +168,11 @@ def startup():
     if selection in ['1','2']:
         username= input("user name: ")
         passcode= input("password: ")
-    else:
+    if selection == '3':
         username="guest"
         passcode=None
+    if selection == '4':
+        quit()
   
     cnx = mysql.connector.connect(
         host="127.0.0.1",
