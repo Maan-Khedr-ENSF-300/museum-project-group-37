@@ -25,7 +25,7 @@
             "name": "ArtObjects_Database",
             "database": "Art_Museum",
             "username": "root",
-            "password": "Raniiscute123.",
+            "password": "password",
             "connectionTimeout": 1000
         }
     ]
