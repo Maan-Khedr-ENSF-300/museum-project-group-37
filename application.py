@@ -6,14 +6,13 @@ def format(cur):
     print("Search found ",len(search_result)," Entries:\n")
     header_size=len(col_names)
     for i in range(header_size):
-        print("{:<30s}".format(col_names[i]),end='')
+        print("{:<50s}".format(col_names[i]),end='')
     print()
     print(30*header_size*'-')
     for row in search_result:
         for val in row:
-            print("{:<30s}".format(str(val)),end='')
+            print("{:<50s}".format(str(val)),end='')
         print()
-
 
 def admin_consol(cur,cnx): 
     print("Which operation would you like to execute?")
@@ -27,44 +26,50 @@ def admin_consol(cur,cnx):
     print("8-Manage Users")
     selection = input("Please type 1, 2, 3, 4, 5, 6, 7, or 8 to select: ")
     if selection == '8':
-        user_management(cur,cnx)
+        user_adding(cur,cnx)
     
 
 
 
 
-def user_management(cur,cnx):
-    user_choice = input("Would you like to print all current users? (Y or N) ")
-    if user_choice == 'Y':
-        instr = "select * from information_schema.USER_PRIVILEGES"
-        cur.execute(instr)
-        format(cur)
-        print()
-        print("Which operation would you like to execute?")
-        print("1- Add a new user")
-        print("2- Edit current users")
-        print("3- Can block users")
-        print("4- Modify users")
-        selection = input("Please enter 1,2,3 or 4: ")
-        if selection == '1':
-            username = input("Please enter the username you would like to add: ") or None
-            password = input("Please enter the password you would like to add: ") or None
-            dropping_user = "drop user if exists '%s'@localhost"
-            cur.execute(dropping_user,)
-            adding_user = "create user '%s'@localhost identified with mysql_native_password by '%s'"
-            cur.execute(adding_user, (username,password,), multi = True)
-            cnx.commit()
-            print("The user was added successfully")
-            startup()
+def user_adding(cur,cnx):
+    print()
+    print("List of all current users and their privileges:")
+    print()
+    instr = "select * from information_schema.USER_PRIVILEGES"
+    cur.execute(instr)
+    format(cur)
+    print()
+    print("Which operation would you like to execute?")
+    print("1- Add a new user")
+    print("2- Edit current users")
+    print("3- Can block users")
+    print("4- Modify users")
+    selection = input("Please enter 1,2,3 or 4: ")
+    if selection == '1':
+        username = input("Please enter the username you would like to add: ") or None
+        password = input("Please enter the password you would like to add: ") or None
+        dropping_user = "drop user if exists '%s'@localhost" %(username)
+        cur.execute(dropping_user,)
+        adding_user = "create user '%s'@localhost identified by '%s'"%(username,password)
+        cur.execute(adding_user)
+        privileges = "grant all privileges on *.* to '%s'@localhost with grant option"%(username)
+        cur.execute(privileges)
+        flushing = "flush privileges"
+        cur.execute(flushing)
+        cnx.commit()
+        print("The user was added successfully")
+        startup()
 
-    else:
-        print("Which operation would you like to execute?")
-        print("1- Add a new user")
-        print("2- Edit current users")
-        print("3- Can block users")
-        print("4- Modify users")
-        selection = input("Please enter 1,2,3 or 4: ")
-        
+def user_access(cur):
+    print()
+    print("List of all current users and their privileges:")
+    print()
+    instr = "select * from information_schema.USER_PRIVILEGES"
+    cur.execute(instr)
+    format(cur)
+    print()
+    pass
 
 
 def guest_view(cur):
