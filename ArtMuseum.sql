@@ -126,6 +126,11 @@ CREATE TABLE SCULPTURE (
     primary key (Cname)
     );
 
+    INSERT INTO COLLECTIONS (Cname, C_des, Contpers, Ctype, Phone, Address)
+    VALUES
+    ('masterpieces of the louvre','Artworks essential to history and the history of art','Alissa Brown','Paintings', '(945)-589-6261', '1798 Chapel Street'),
+    ('the art of portraiture','portraiture through the ages with sculptures, paintings, drawings and engravings of emblematic figures','Ashley Carter','paintings, drawings and engravings of emblematic figures', '(751)-431-1244', '292 Lyon Avenue');
+
 
 DROP ROLE IF EXISTS db_admin@localhost, read_access@localhost;
 CREATE ROLE db_admin@localhost, read_access@localhost;
@@ -299,6 +304,138 @@ def insert_other(cur,cnx):
 
 
 
+def insert_artist(cur,cnx):
+    artist_name = input("Please enter the name of the artist: ") or None
+    delete_artist_name = "delete from artist where Aname = %s"
+    val = (artist_name,)
+    cur.execute(delete_artist_name, val)
+    date_d = input("Enter the date the artist died (press enter and leave blank if unknown): ") or None
+    date_b = input("Enter the date the artist was born (press enter and leave blank if unknown): ") or None
+    des_a = input("Enter a short description of the artist (press enter and leave blank if unknown): ") or None
+    e_poch = input("Enter the era of the artist (press enter and leave blank if unknown): ") or None
+    style_m = input("Enter the main style of the artist (press enter and leave blank if unknown): ") or None
+    origin_c = input("Enter the country of origin of the artist (press enter and leave blank if unknown): ") or None
+    insert_artist = ("insert into artist "
+                        "values (%s,%s,%s,%s,%s,%s,%s)")
+    artist_data = (artist_name,date_d,date_b,des_a,e_poch,style_m,origin_c)
+    cur.execute(insert_artist,artist_data)
+    cnx.commit()
+    instr = "select * from artist"
+    cur.execute(instr)
+    format(cur)
+    while artist_name == None:
+        print("Your artist needs a name!")
+        artist_name = input("Please enter the name of the artist: ") or None
+        if artist_name == None:
+            continue
+        else:
+            delete_artist_name = "delete from artist where Aname = %s"
+            val = (artist_name,)
+            cur.execute(delete_artist_name, val)
+            date_d = input("Enter the date the artist died (press enter and leave blank if unknown): ") or None
+            date_b = input("Enter the date the artist was born (press enter and leave blank if unknown): ") or None
+            des_a = input("Enter a short description of the artist (press enter and leave blank if unknown): ") or None
+            e_poch = input("Enter the era of the artist (press enter and leave blank if unknown): ") or None
+            style_m = input("Enter the main style of the artist (press enter and leave blank if unknown): ") or None
+            origin_c = input("Enter the country of origin of the artist (press enter and leave blank if unknown): ") or None
+            insert_artist = ("insert into artist "
+                                "values (%s,%s,%s,%s,%s,%s,%s)")
+            artist_data = (artist_name,date_d,date_b,des_a,e_poch,style_m,origin_c)
+            cur.execute(insert_arist,artist_data)
+            cnx.commit()
+            instr = "select * from artist"
+            cur.execute(instr)
+            print("Displaying results...")
+            format(cur)
+            startup()
+
+
+def insert_collections(cur,cnx):
+    c_name = input("Please enter the name of the collection: ") or None
+    delete_c_name = "delete from collections where Cname = %s"
+    val = (c_name,)
+    cur.execute(delete_c_name, val)
+    des_c = input("Enter a short description of the collection (press enter and leave blank if unknown): ") or None
+    contact_p = input("Enter the contact person of the collection (press enter and leave blank if unknown): ") or None
+    type_c = input("Enter the collection type (press enter and leave blank if unknown): ") or None
+    phone_c = input("Enter the contact phone number (press enter and leave blank if unknown): ") or None
+    address_c = input("Enter the collection address (press enter and leave blank if unknown): ") or None
+    insert_collections = ("insert into collections "
+                        "values (%s,%s,%s,%s,%s,%s)")
+    collections_data = (c_name, des_c, contact_p, type_c, phone_c, address_c)
+    cur.execute(insert_collections,collections_data)
+    cnx.commit()
+    instr = "select * from collections"
+    cur.execute(instr)
+    format(cur)
+    while c_name == None:
+        print("Your collection needs a name!")
+        c_name = input("Please enter the name of the collection: ") or None
+        if c_name == None:
+            continue
+        else:
+            delete_c_name = "delete from collections where Cname = %s"
+            val = (c_name,)
+            cur.execute(delete_c_name, val)
+            des_c = input("Enter a short description of the collection (press enter and leave blank if unknown): ") or None
+            contact_p = input("Enter the contact person of the collection (press enter and leave blank if unknown): ") or None
+            type_c = input("Enter the collection type (press enter and leave blank if unknown): ") or None
+            phone_c = input("Enter the contact phone number (press enter and leave blank if unknown): ") or None
+            address_c = input("Enter the collection address (press enter and leave blank if unknown): ") or None
+            insert_collections = ("insert into collections "
+                        "values (%s,%s,%s,%s,%s,%s)")
+            collections_data = (c_name, des_c, contact_p, type_c, phone_c, address_c)
+            cur.execute(insert_collections,collections_data)
+            cnx.commit()
+            instr = "select * from collections"
+            cur.execute(instr)
+            print("Displaying results...")
+            format(cur)
+            startup()
 
 
 
+def insert_art_project(cur,cnx):
+    id_numberap = input("Please enter the id number of the art project: ") or None
+    delete_ap_id = "delete from art_projec where id number = %s"
+    val = (id_numberap,)
+    cur.execute(delete_ap_id, val)
+    country_ap = input("Enter the country of the art project (press enter and leave blank if unknown): ") or None
+    epoch_ap = input("Enter the era of the art project (press enter and leave blank if unknown): ") or None
+    title_ap = input("Enter the title of the art project (press enter and leave blank if unknown): ") or None
+    des_ap = input("Enter a description for the art project(press enter and leave blank if unknown): ") or None
+    year_ap = input("Enter the year of the art project (press enter and leave blank if unknown): ") or None
+    insert_ap = ("insert into art_project "
+                        "values (%s,%s,%s,%s,%s,%s)")
+    ap_data = (id_numberap,country_ap, epoch_ap, title_ap, des_ap, year_ap ,insert_ap)
+    cur.execute(insert_ap,ap_data)
+    cnx.commit()
+    instr = "select * from art_project"
+    cur.execute(instr)
+    format(cur)
+    while id_numberap == None:
+        print("Your art project needs an id number!")
+        id_numberap = input("Please enter the id number of the painting: ") or None
+        if id_numberap == None:
+            continue
+        else:
+            delete_ap_id = "delete from art_project where id number = %s"
+            val = (id_numberap,)
+            cur.execute(delete_ap_id, val)
+            country_ap = input("Enter the country of the art project (press enter and leave blank if unknown): ") or None
+            epoch_ap = input("Enter the era of the art project (press enter and leave blank if unknown): ") or None
+            title_ap = input("Enter the title of the art project (press enter and leave blank if unknown): ") or None
+            des_ap = input("Enter a description for the art project(press enter and leave blank if unknown): ") or None
+            year_ap = input("Enter the year of the art project (press enter and leave blank if unknown): ") or None
+            insert_ap = ("insert into art_project "
+                                "values (%s,%s,%s,%s)")
+            ap_data = (id_numberap,country_ap, epoch_ap, title_ap, des_ap, year_ap ,insert_ap)
+            cur.execute(insert_ap,ap_data)
+            cnx.commit()
+            instr = "select * from art_project"
+            cur.execute(instr)
+            print("Displaying results...")
+            format(cur)
+            startup()
+
+            
