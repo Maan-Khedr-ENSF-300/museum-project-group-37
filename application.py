@@ -141,7 +141,7 @@ def guest_view(cur):
     print("1- Art Object Information")
     print("2- Artist Information")
     print("3- Our Collections")
-    selection = input()
+    selection = input("Please type 1,2 or 3: ")
 
     if selection == '1':
         print("Which type of art object would you like to see information for?")

@@ -133,8 +133,8 @@ CREATE TABLE SCULPTURE (
 
 DROP ROLE IF EXISTS db_admin@localhost, read_access@localhost;
 CREATE ROLE db_admin@localhost, read_access@localhost;
-GRANT ALL PRIVILEGES ON OLYMPICARCHERY.* TO db_admin@localhost;
-GRANT Select ON OLYMPICARCHERY.* TO read_access@localhost;
+GRANT ALL PRIVILEGES ON ART_MUSEUM.* TO db_admin@localhost;
+GRANT Select ON ART_MUSEUM.* TO read_access@localhost;
 
 DROP USER IF EXISTS administrator@localhost;
 DROP USER IF EXISTS guest@localhost;
