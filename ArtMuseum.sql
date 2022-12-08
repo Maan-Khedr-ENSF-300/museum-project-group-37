@@ -15,8 +15,8 @@ CREATE TABLE ART_OBJECT (
 
     INSERT INTO ART_OBJECT (ID_No, Country, Epoch, Title, Descrip, Year1)
     VALUES
-    ('015','Italy','Middle ages','Field Armour of King Henry VIII of England', 'armour worn by King Henry VIII', '1544'),
-    ('016','Italy','Middle ages','Cup and cover', 'Rock crystal and gilded silver cup', '1511'),
+    ('015','Italy','Middle ages','Field Armour of King Henry VIII ', 'Armour worn', '1544'),
+    ('016','Italy','Middle ages','Cup with cover', 'Rock crystal and gilded silver cup', '1511'),
     ('017','Spain','Victorian','The Absinthe glass', 'Painted bronze Absinthe spoon', '1914'),
     ('018','France','Middle ages','The sea-dog table','Wallnut wood gilded silver table', '1575'),
     ('019','Italy','Middle ages','Angel bearing candlestick', 'Bronze angel statue', '1524'),
@@ -37,16 +37,16 @@ CREATE TABLE SCULPTURE (
 	Height					varchar(30), 
     Material				varchar(30),
     Style					varchar(30),
-    Weight					varchar(30), 
+    weight_lbs					varchar(30), 
     FOREIGN KEY (ID_No) REFERENCES ART_OBJECT (ID_No)
     );
 
-    INSERT INTO SCULPTURE (ID_No, Height, Material, Style)
+    INSERT INTO SCULPTURE (ID_No, Height, Material, Style, weight_lbs)
     VALUES
-    ('015','73 inch','gold','italian'),
-    ('016','13 inch','crystal','lapidary'),
-    ('017','21 inch','glass','abstract'),
-    ('018','57 inch','wood','furniture');
+    ('015','73 inch','gold','italian', '94.4'),
+    ('016','13 inch','crystal','lapidary', '12.4'),
+    ('017','21 inch','glass','abstract', '0.9'),
+    ('018','57 inch','wood','furniture', '48.2');
 
 
     DROP TABLE IF EXISTS STATUE;
