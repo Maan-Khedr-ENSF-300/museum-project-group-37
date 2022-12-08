@@ -329,13 +329,8 @@ def admin_consol(cur,cnx):
     print("Which operation would you like to execute?")
     print("1-Insert")
     print("2-Delete")
-    print("3-Update")
-    print("4-Create Table")
-    print("5-Create View")
-    print("6-Alter")
-    print("7-Query")
     
-    selection = input("Please type 1, 2, 3, 4, 5, 6, or 7 to select: ")
+    selection = input("Please type 1 or 2 to select: ")
     if selection == '1':
         print("Which table would you like to insert your data into?")
         print("1-Art object")
@@ -410,7 +405,6 @@ def user_adding(cur,cnx):
     print("1- Add a new user")
     print("2- Edit current users")
     print("3- Block users")
-    print("4- Modify users")
     selection = input("Please enter 1,2,3 or 4: ")
     if selection == '1':
         username = input("Please enter the username you would like to add: ") or None
