@@ -325,6 +325,78 @@ def insert_art_object(cur,cnx):
             format(cur)
             startup()
 
+def delete_art_object(cur, cnx):
+    art_object_to_delete = input("Enter the ID number of the art object you want to delete: ")
+    delete_art = "DELETE FROM art_object WHERE ID_No = %s" %(art_object_to_delete)
+    cur.execute(delete_art)
+    cnx.commit()
+    instr = "select * from art_object"
+    cur.execute(instr)
+    format(cur)
+    startup()
+
+
+def delete_sculpture(cur, cnx):
+    sculpture_to_delete = input("Enter the ID number of the art object you want to delete: ")
+    delete_art = "DELETE FROM art_object WHERE ID_No = %s" %(sculpture_to_delete)
+    cur.execute(delete_art)
+    cnx.commit()
+    instr = "select * from art_object"
+    cur.execute(instr)
+    format(cur)
+    startup()
+
+def delete_statue(cur, cnx):
+    statue_to_delete = input("Enter the ID number of the art object you want to delete: ")
+    delete_art = "DELETE FROM art_object WHERE ID_No = %s" %(statue_to_delete)
+    cur.execute(delete_art)
+    cnx.commit()
+    instr = "select * from art_object"
+    cur.execute(instr)
+    format(cur)
+    startup()
+
+def delete_painting(cur, cnx):
+    painting_to_delete = input("Enter the ID number of the art object you want to delete: ")
+    delete_art = "DELETE FROM art_object WHERE ID_No = %s" %(painting_to_delete)
+    cur.execute(delete_art)
+    cnx.commit()
+    instr = "select * from art_object"
+    cur.execute(instr)
+    format(cur)
+    startup()
+
+def delete_other(cur, cnx):
+    other_to_delete = input("Enter the ID number of the art object you want to delete: ")
+    delete_art = "DELETE FROM art_object WHERE ID_No = %s" %(other_to_delete)
+    cur.execute(delete_art)
+    cnx.commit()
+    instr = "select * from art_object"
+    cur.execute(instr)
+    format(cur)
+    startup()
+
+def delete_artist(cur, cnx):
+    artist_to_delete = input("Enter the ID number of the art object you want to delete: ")
+    delete_art = "DELETE FROM art_object WHERE ID_No = %s" %(artist_to_delete)
+    cur.execute(delete_art)
+    cnx.commit()
+    instr = "select * from art_object"
+    cur.execute(instr)
+    format(cur)
+    startup()
+
+def delete_collections(cur, cnx):
+    collections_to_delete = input("Enter the ID number of the art object you want to delete: ")
+    delete_art = "DELETE FROM art_object WHERE ID_No = %s" %(collections_to_delete)
+    cur.execute(delete_art)
+    cnx.commit()
+    instr = "select * from art_object"
+    cur.execute(instr)
+    format(cur)
+    startup()
+
+
 def admin_consol(cur,cnx): 
     print("Which operation would you like to execute?")
     print("1-Insert")
@@ -334,12 +406,13 @@ def admin_consol(cur,cnx):
     if selection == '1':
         print("Which table would you like to insert your data into?")
         print("1-Art object")
-        print("2-Structure")
+        print("2-Sculpture")
         print("3-Statue")
         print("4-Painting")
         print("5-Other")
         print("6-Artist")
         print("7-Collection")
+
 
         sub_selection = input("Please type 1, 2, 3, 4, 5, 6, or 7 to select: ")
         if sub_selection == '1':
@@ -359,6 +432,33 @@ def admin_consol(cur,cnx):
             insert_artist(cur,cnx)
         elif sub_selection == '7':
             insert_collections(cur,cnx)
+    
+    elif selection == '2':
+        print("Which table do you want to delete from? ")
+        print("1-Art object")
+        print("2-Sculpture")
+        print("3-Statue")
+        print("4-Painting")
+        print("5-Other")
+        print("6-Artist")
+        print("7-Collection")
+
+        sub_selection = input("Please type 1, 2, 3, 4, 5, 6, or 7 to select: ")
+
+        if sub_selection == '1':
+            delete_art_object(cur,cnx)
+        elif sub_selection == '2':
+            delete_sculpture(cur,cnx)
+        elif sub_selection == '3':
+            delete_statue(cur,cnx)
+        elif sub_selection == '4' : 
+            delete_painting(cur,cnx)
+        elif sub_selection == '5':
+            delete_other(cur,cnx) 
+        elif sub_selection == '6':
+            delete_artist(cur,cnx)
+        elif sub_selection == '7':
+            delete_collections(cur,cnx)
 
     
 
@@ -485,6 +585,9 @@ def guest_view(cur):
         subselection = input('Please type 1, 2, 3 or 4: ')
         print()
         if subselection == '1':
+            pass
+        if subselection == '2':
+            pass
             join = "select * from art_object natural join sculpture"
             cur.execute(join)
             col_names=cur.column_names
@@ -609,9 +712,9 @@ def startup():
 
 
     if selection == '1':
-        user_adding(cur,cnx)
-    elif selection == '2':
         admin_consol(cur,cnx)
+    elif selection == '2':
+        pass
     elif selection == '3':
         guest_view(cur)
     else:
@@ -619,4 +722,13 @@ def startup():
 
 
 if __name__ == "__main__":
+
     startup()
+
+def guest_view(cur):
+    print("What are you looking for:")
+    print("1- Event information")
+    print("2- Participant information")
+    print("3- Country information")
+    selection = input()
+
