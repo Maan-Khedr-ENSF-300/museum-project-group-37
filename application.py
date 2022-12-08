@@ -207,3 +207,9 @@ def guest_view(cur):
     print("3- Country information")
     selection = input()
 
+def delete_row(cur):
+
+    table = input("Enter the table you want to delete from: ")
+    art_id_to_delete = input("Enter the ID number of the art object you want to delete: ")
+    delete_art = "DELETE FROM table WHERE id_no = art_id_to_delete"
+    cur.execute(delete_art, {'Aname': art_id_to_delete})
