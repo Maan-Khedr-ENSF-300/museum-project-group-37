@@ -22,11 +22,11 @@ CREATE TABLE ART_OBJECT (
     ('019','Italy','Middle ages','Angel bearing candlestick', 'Bronze angel statue', '1524'),
     ('020','England','Middle ages','Unidentified saint', 'Stone saint statue', '1505'),
     ('021','France','Middle ages','John the Evangelist', 'Stone statue', '1505'),
-    ('022','Britian','Renaissance','Armor garniture of george clifford', 'armor worn by geroge clifford', '1586'),
+    ('022','Britian','Renaissance','Armor garniture of george clifford', 'Armor worn', '1586'),
     ('023','Spain','Modern art','Violen and engraving','Abstract modern day art', '1913'),
-    ('024','Spain','Edwardian','Still life : The table', 'cut and pasted printed wall papers', '1914'),
-    ('025','Netherlands','Jacobian era','Trompe l’Oeil Still life with flower garland and curtain', 'still life flower painting', '1658'),
-    ('026','Spain','Jacobian era','still life with four bunches of grapes', 'oil painted grapes', '1636'),
+    ('024','Spain','Edwardian','Still life : The table', 'Cut and pasted printed wall papers', '1914'),
+    ('025','Netherlands','Jacobian era','Trompe l’Oeil Still life with flower garland and curtain', 'Flower painting', '1658'),
+    ('026','Spain','Jacobian era','Still life with four bunches of grapes', 'Oil painted grapes', '1636'),
     ('027','Unites states','Victorian', 'Reconstructed jug', 'Alkaline glazed stone ware jug', '1840'),
     ('028','Germany','Middle ages', 'Basin', 'Gilded silver basin', '1535');
 
@@ -37,11 +37,11 @@ CREATE TABLE SCULPTURE (
 	Height					varchar(30), 
     Material				varchar(30),
     Style					varchar(30),
-    weight_lbs					varchar(30), 
+    Weight_lbs					varchar(30), 
     FOREIGN KEY (ID_No) REFERENCES ART_OBJECT (ID_No)
     );
 
-    INSERT INTO SCULPTURE (ID_No, Height, Material, Style, weight_lbs)
+    INSERT INTO SCULPTURE (ID_No, Height, Material, Style, Weight_lbs)
     VALUES
     ('015','73 inch','gold','italian', '94.4'),
     ('016','13 inch','crystal','lapidary', '12.4'),
@@ -55,16 +55,16 @@ CREATE TABLE SCULPTURE (
     Height					varchar(30), 
     Material				varchar(30),
     Style					varchar(30),
-    Weight					varchar(30), 
+    Weight_lbs					varchar(30), 
     FOREIGN KEY (ID_No) REFERENCES ART_OBJECT (ID_No)
     );
     
-    INSERT INTO STATUE (ID_No, Height, Material, Style)
+    INSERT INTO STATUE (ID_No, Height, Material, Style,Weight_lbs)
     VALUES
-    ('019','40 inch','bronze','equestrian'),
-    ('020','20 inch','terracotta','hellinistic'),
-    ('021','18 inch','terracotta','roman'),
-    ('022','70 inch','steel','armor');
+    ('019','40 inch','bronze','equestrian', '8.2'),
+    ('020','20 inch','terracotta','hellinistic','15.2'),
+    ('021','18 inch','terracotta','roman','17.2'),
+    ('022','70 inch','steel','armor','22.1');
     
     DROP TABLE IF EXISTS PAINTING;
     CREATE TABLE PAINTING (

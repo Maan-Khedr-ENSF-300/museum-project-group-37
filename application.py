@@ -8,11 +8,21 @@ def format(cur):
     for i in range(header_size):
         print("{:<30s}".format(col_names[i]),end='')
     print()
-    print(30*header_size*'-')
+    print(28*header_size*'-')
     for row in search_result:
         for val in row:
-            print("{:<30s}".format(str(val)),end='')
+            print("{:<25s}".format(str(val)),end=' ')
         print()
+
+
+def searchkey_provided(cur, searchkey):
+    if searchkey != None:
+        instr = "select * from artist where aname = %(aname)s"
+        cur.execute(instr, {'aname':searchkey})
+        format(cur)
+        startup()
+    else:
+        return
 
 
 def insert_sculpture(cur,cnx):
@@ -391,13 +401,8 @@ def admin_consol(cur,cnx):
     print("Which operation would you like to execute?")
     print("1-Insert")
     print("2-Delete")
-    print("3-Update")
-    print("4-Create Table")
-    print("5-Create View")
-    print("6-Alter")
-    print("7-Query")
     
-    selection = input("Please type 1, 2, 3, 4, 5, 6, or 7 to select: ")
+    selection = input("Please type 1 or 2 to select: ")
     if selection == '1':
         print("Which table would you like to insert your data into?")
         print("1-Art object")
@@ -500,7 +505,6 @@ def user_adding(cur,cnx):
     print("1- Add a new user")
     print("2- Edit current users")
     print("3- Block users")
-    print("4- Modify users")
     selection = input("Please enter 1,2,3 or 4: ")
     if selection == '1':
         username = input("Please enter the username you would like to add: ") or None
@@ -564,11 +568,13 @@ def user_edit(cur,cnx):
 
 
 def guest_view(cur):
+    print()
     print("What would you like to see:")
     print("1- Art Object Information")
     print("2- Artist Information")
     print("3- Our Collections")
     selection = input("Please type 1,2 or 3: ")
+    print()
 
     if selection == '1':
         print("Which type of art object would you like to see information for?")
@@ -576,11 +582,99 @@ def guest_view(cur):
         print("2- Statues")
         print("3- Paintings")
         print("4- Other")
-        subselection = input('Please type 1, 2, 3 or 4:')
+        subselection = input('Please type 1, 2, 3 or 4: ')
+        print()
         if subselection == '1':
             pass
         if subselection == '2':
             pass
+            join = "select * from art_object natural join sculpture"
+            cur.execute(join)
+            col_names=cur.column_names
+            search_result=cur.fetchall()
+            print()
+            print("Search found ",len(search_result)," Entries:\n")
+            header_size=len(col_names)
+            for i in range(header_size):
+                print("{:<21s}".format(col_names[i]),end='')
+            print()
+            print(203*'-')
+            for row in search_result:
+                for val in row:
+                    print("{:<16s}".format(str(val)),end='    ')
+                print()
+        elif subselection == '2':
+            join = "select * from art_object natural join statue"
+            cur.execute(join)
+            col_names=cur.column_names
+            search_result=cur.fetchall()
+            print()
+            print("Search found ",len(search_result)," Entries:\n")
+            header_size=len(col_names)
+            for i in range(header_size):
+                print("{:<21s}".format(col_names[i]),end='')
+            print()
+            print(203*'-')
+            for row in search_result:
+                for val in row:
+                    print("{:<20s}".format(str(val)),end=' ')
+                print()
+        elif subselection == '3':
+            join = "select * from art_object natural join painting"
+            cur.execute(join)
+            col_names=cur.column_names
+            search_result=cur.fetchall()
+            print()
+            print("Search found ",len(search_result)," Entries:\n")
+            header_size=len(col_names)
+            for i in range(header_size):
+                print("{:<21s}".format(col_names[i]),end='')
+            print()
+            print(203*'-')
+            for row in search_result:
+                for val in row:
+                    print("{:<19s}".format(str(val)),end=' ')
+                print()
+
+        else:
+            join = "select * from art_object natural join other"
+            cur.execute(join)
+            col_names=cur.column_names
+            search_result=cur.fetchall()
+            print()
+            print("Search found ",len(search_result)," Entries:\n")
+            header_size=len(col_names)
+            for i in range(header_size):
+                print("{:<28s}".format(col_names[i]),end='')
+            print()
+            print(203*'-')
+            for row in search_result:
+                for val in row:
+                    print("{:<26s}".format(str(val)),end=' ')
+                print()
+    elif selection == '2':
+        aname = input("Please enter the artists name you would like to see (Press enter to view all):  ") or None
+        searchkey_provided(cur,aname)
+        instr = "select * from artist"
+        cur.execute(instr)
+        format(cur)
+    else:
+        instr = "select * from collections"
+        cur.execute(instr)
+        col_names=cur.column_names
+        search_result=cur.fetchall()
+        print()
+        print("Search found ",len(search_result)," Entries:\n")
+        header_size=len(col_names)
+        for i in range(header_size):
+            print("{:<35s}".format(col_names[i]),end='')
+        print()
+        print(203*'-')
+        for row in search_result:
+            for val in row:
+                print("{:<12s}".format(str(val)),end=' ')
+            print()
+
 
 def startup():
   
