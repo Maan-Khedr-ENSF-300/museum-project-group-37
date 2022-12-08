@@ -585,9 +585,6 @@ def guest_view(cur):
         subselection = input('Please type 1, 2, 3 or 4: ')
         print()
         if subselection == '1':
-            pass
-        if subselection == '2':
-            pass
             join = "select * from art_object natural join sculpture"
             cur.execute(join)
             col_names=cur.column_names
@@ -603,7 +600,7 @@ def guest_view(cur):
                 for val in row:
                     print("{:<16s}".format(str(val)),end='    ')
                 print()
-        elif subselection == '2':
+        if subselection == '2':
             join = "select * from art_object natural join statue"
             cur.execute(join)
             col_names=cur.column_names
@@ -617,7 +614,7 @@ def guest_view(cur):
             print(203*'-')
             for row in search_result:
                 for val in row:
-                    print("{:<20s}".format(str(val)),end=' ')
+                    print("{:<16s}".format(str(val)),end='    ')
                 print()
         elif subselection == '3':
             join = "select * from art_object natural join painting"
@@ -712,9 +709,9 @@ def startup():
 
 
     if selection == '1':
-        admin_consol(cur,cnx)
+        user_adding(cur,cnx)
     elif selection == '2':
-        pass
+        admin_consol(cur,cnx)
     elif selection == '3':
         guest_view(cur)
     else:
